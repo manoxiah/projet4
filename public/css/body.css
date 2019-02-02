@@ -1,0 +1,29 @@
+
+
+.bg-lightgrey
+{
+    background-color: lightgrey;
+}
+
+.bg-grey
+{
+    background-color: #F6F1EF;
+}
+
+.principalPicture
+{
+    padding: 0;
+}
+
+.paragraph p
+{
+    text-align: justify;
+    padding: 10px 20px;
+    font-size: 20px;
+    color: grey;
+}
+
+.paragraph
+{
+    padding: 20px 20px;
+}

@@ -1,0 +1,53 @@
+
+.datepicker-switch, .next, .prev, .dow, .today, .clear
+{
+    padding: 15px;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.next, .prev
+{
+   background-color: lightgrey;
+}
+
+.datepicker-days, .datepicker-months, .datepicker-years, .datepicker-decades, .datepicker-centuries
+{
+    width: auto;
+    height: auto;
+    min-width: 500px;
+    min-height: 300px;
+}
+
+.table-condensed
+{
+    width: 100%;
+    height: 100%;
+}
+
+.datepicker-dropdown, .dropdown-menu, .datepicker-orient-left, .datepicker-orient-bottom
+{
+    box-shadow: 10px 10px 5px grey;
+    border: 1px solid #1d2124;
+}
+
+.clear
+{
+    padding: 15px;
+}
+
+.line-basket
+{
+    font-weight: bold;
+}
+
+.btn-remove
+{
+    color: lightcoral;
+    float: right;
+}
+
+.btn-remove:hover
+{
+    color: red;
+}

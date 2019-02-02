@@ -1,0 +1,119 @@
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Formulaire de la réservation{% endblock %}
+        {% block stylesheets %}
+            {{ parent() }}
+            <link rel="stylesheet" type="text/css" href="{{ asset("picker/css/bootstrap-datepicker.min.css") }}">
+        {% endblock %}
+    {% block section %}
+
+
+
+        <div class="paragraph">
+            <div class="container col-lg-12">
+
+                <div class="row">
+                    <div class="col-md-8 content-area">
+
+                        <h4><strong>Formulaire de la réservation</strong></h4>
+                        {{ form_start(form, { 'label' : false, 'attr': {'class': 'border border-light p-5 bg-grey'} }) }}
+                        {% if not form.vars.valid %}
+                            <ul>
+                                {# Loop through every form item #}
+                                {% for child in form.children %}
+                                    {# Display the errors of the form item #}
+                                    {%for error in child.vars.errors%}
+                                        <li>{{error.message}}</li>
+                                    {%endfor%}
+                                {%endfor%}
+                            </ul>
+                        {%endif%}
+
+                        {{ form_widget(form) }}
+                        <button class="btn btn-info btn-block my-4">Ajouter au panier</button>
+                        {{ form_end(form) }}
+
+                       </div>
+
+                    <div class="col-md-4 widget-area">
+                        <h4><strong>Mon panier</strong></h4>
+                        <div class="border border-light p-5 bg-grey">
+                                {% set total = 0 %}
+                                {% for key,ticket in basket %}
+                                    <div class="form-control mb-4 line-basket">
+                                        {{ ticket.name }} {{ ticket.firstname }} - {{ ticket.price }} €
+                                        <a class="btn-remove" href="{{ path('booking_delete_to_basket',{'id':key}) }}">X</a>
+                                    </div>
+                                    {% set total = total + ticket.price %}
+                                {% endfor %}
+                            <br/><strong>Total :</strong> {{ total  }} €
+                        </div>
+                    </div>
+                </div><br/><br/>
+
+                <div class="row">
+                    <div class="col-md-12 content-area">
+                        <h4><strong>Formulaire de paiement</strong></h4>
+                        <form action="{{ path('booking_payment') }}" method="POST" class="border border-light p-5 bg-grey">
+                            <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                                    data-key="pk_test_SV8temw8vrpSFTOWIj4Oo1c1"
+                                    data-amount="{{ total * 100  }}"
+                                    data-name="Informations de paiement"
+                                    data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+                                    data-locale="auto"
+                                    data-currency="eur">
+                            </script>
+                            <button type="submit" class="btn btn-info btn-block my-1">Je paie</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div><br/><br/>
+
+    {% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset("picker/js/bootstrap-datepicker.js") }}"></script>
+    <script src="{{ asset("picker/locales/bootstrap-datepicker.fr.min.js") }}"></script>
+    <script src="{{ asset("js/listScriptJS/scriptJSBookingDate.js") }}"></script>
+    <script >
+        
+            $('.date-picker-booking').change(function(){
+                var day = $('.date-picker-booking').val();
+                day = day.replace(/[/]/g,"-");
+                $.get("/booking/verify_nb_ticket/"+day, function(data) {
+                    if(data == "demi journee")
+                    {
+                        new Noty({
+                            text: 'Vous ne pouvez prendre que des tickets demi-journée pour aujourd\'hui.',
+                            type: 'warning',
+                            timeout: 3000,
+                            progressBar: true
+
+                            }).show();
+                            $('.ChoiceType0').css({'display':'none'});
+                    }
+                    else
+                    {
+                        $('.ChoiceType0').css({'display':'block'});
+                    }
+                    if(data == "il y a plus de 1000 tickets.")
+                    {
+                        new Noty({
+                            text: 'il y a déja plus de 1000 tickets à ce jour.',
+                            type: 'error',
+                            timeout: 3000,
+                            progressBar: true
+
+                            }).show();
+                            $('.date-picker-booking').val('');
+                    }
+                });
+            })
+            
+    </script> 
+
+{% endblock %}
+

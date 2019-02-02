@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Récapitulatif de la réservation{% endblock %}
+
+{% block section %}
+    <div class="paragraph">
+        <div class="widget-area">
+            <h4><strong>Récapitulatif de la réservation</strong></h4>
+            <div class="border border-light p-5 bg-grey">
+                <ul>
+                {% set total = 0 %}
+                {% for key,ticket in basket %}
+                    <li class="form-control mb-4">
+                        {{ ticket.name }} {{ ticket.firstname }} - {{ ticket.price }} €
+                    </li>
+                    {% set total = total + ticket.price %}
+                {% endfor %}
+                </ul>
+                <br/><strong>Total payé :</strong> {{ total  }} €
+                <br/><br/><br/><a class="btn btn-info btn-block my-4" href="{{ path('ticket_index') }}">Je retoune à l'accueil</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+
