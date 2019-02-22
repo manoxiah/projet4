@@ -16,13 +16,11 @@
                 <div class="row">
                     <div class="col-md-8 content-area">
 
-                        <h4><strong>Formulaire de la réservation</strong></h4>
+                        <h4><strong>Formulaire de réservation</strong></h4>
                         {{ form_start(form, { 'label' : false, 'attr': {'class': 'border border-light p-5 bg-grey'} }) }}
                         {% if not form.vars.valid %}
                             <ul>
-                                {# Loop through every form item #}
                                 {% for child in form.children %}
-                                    {# Display the errors of the form item #}
                                     {%for error in child.vars.errors%}
                                         <li>{{error.message}}</li>
                                     {%endfor%}

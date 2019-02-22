@@ -2,14 +2,19 @@
 
 namespace App\Entity;
 
+/* a quoi sert le as ???????*/
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\TicketRepository")
  */
+/*déclaration de la class de nom Ticket*/
 class Ticket
 {
+    /*déclaration des attributs de la class, ici en private donc inaccessible à l'exterieur dee cette lcass 
+    declaration des anotations symfony */
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -88,8 +93,10 @@ class Ticket
      */
     private $code;
 
+    /* declaration du constructeur, fonction lancé automatiquement à l appel de cette class */
     public function __construct()
     {
+        /* attribution des valeurs au variable */
         $this->sendTicket = 0;
         $this->date = new \DateTime();
         $this->code = openssl_random_pseudo_bytes(16);
@@ -98,6 +105,9 @@ class Ticket
         $this->code = bin2hex($this->code);
     }
 
+
+    /* declaration des getter ( recupérer ) et des setter ( attribuer ) 
+    ici getId() qui nous permet de récupérer la valeur de l attribut $id du dessus*/
     public function getId(): ?int
     {
         return $this->id;
@@ -108,6 +118,9 @@ class Ticket
         return $this->type;
     }
 
+    /* ici on declare un setter setType( et qui contient un parametre de type entier et qui est appelé $type), 
+    a quoi sert le self ??????????  
+    pourquoi utilise t on self pour les setter et pourquoi la syntaxe du getter contient un ? avant le type ??????*/
     public function setType(int $type): self
     {
         $this->type = $type;

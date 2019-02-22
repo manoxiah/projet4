@@ -1,0 +1,18 @@
+
+
+<!-- mise en place d'une boucle for pour permettre de lire tous les billets présent dans la variable basket, 
+    pour les envoyer à l'e-mail -->
+{% for ticket in basket %}
+<!-- texte dans une balise paragraphe -->
+    <P>Le Musée du Louvre</P>
+    <!-- logo à envoyer -->
+    <img src="http://www.graphis.com/logos/22beadec-4b41-11e2-ae70-f23c91dffdec/">
+    <!-- texte dans une balise paragraphe appel des valeurs à afficher avec twig, 
+        on récupère la valeur de la variable dateBooking qui est dans le ticket-->
+    <P>Date de réservation : {{ticket.dateBooking}}</P>
+    <p>Prix du billet : {{ticket.price}} euros</p>
+    <P>Nom : {{ticket.name}}</P>
+    <p>Prénom : {{ticket.firstName}}</p>
+    <p>Votre code de réservation : {{ticket.code}}</p><br/><br><br/><br>
+    <!-- on ferme la boucle for-->
+{%endfor%}

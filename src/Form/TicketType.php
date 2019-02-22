@@ -22,6 +22,8 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  * doc repeatetype: https://symfony.com/doc/current/reference/forms/types/repeated.html
  *
  */
+
+ /* quelle est la difference entre extends et implements */
 class TicketType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
