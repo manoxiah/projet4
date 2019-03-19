@@ -34,7 +34,7 @@ class TicketController extends AbstractController
         $session->set('basket',array());
         /* une fois les actions réalisées et validées, on retourne sur la page de nom index 
         syntaxe correcte /ticket/index.html.twig ou ticket/index.html.twig */
-        return $this->render('/ticket/index.html.twig');
+        return $this->render('ticket/index.html.twig');
     }
 
 }

@@ -6,7 +6,7 @@
 <!-- texte dans une balise paragraphe -->
     <P>Le Musée du Louvre</P>
     <!-- logo à envoyer -->
-    <img src="http://www.graphis.com/logos/22beadec-4b41-11e2-ae70-f23c91dffdec/">
+    <img src="{{app.request.getSchemeAndHttpHost()~asset("picture/logoDuLouvre.png")}}">
     <!-- texte dans une balise paragraphe appel des valeurs à afficher avec twig, 
         on récupère la valeur de la variable dateBooking qui est dans le ticket-->
     <P>Date de réservation : {{ticket.dateBooking}}</P>

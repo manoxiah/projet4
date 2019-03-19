@@ -23,6 +23,7 @@ use Stripe\Stripe;
 class BookingController extends AbstractController
 {
 
+
     /**
      * @Route("/form", name="booking_form", methods={"GET","POST"})
      * doc date time: http://php.net/manual/fr/datetime.diff.php

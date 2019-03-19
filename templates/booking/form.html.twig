@@ -81,7 +81,7 @@
             $('.date-picker-booking').change(function(){
                 var day = $('.date-picker-booking').val();
                 day = day.replace(/[/]/g,"-");
-                $.get("/booking/verify_nb_ticket/"+day, function(data) {
+                $.get("verify_nb_ticket/"+day, function(data) {
                     if(data == "demi journee")
                     {
                         new Noty({
