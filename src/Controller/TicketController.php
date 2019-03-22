@@ -30,7 +30,7 @@ class TicketController extends AbstractController
     {
         /* on instancie l'objet "session()" avec "new"( c est quoi new ? ) pour la mettre dans la variable "$session" */
         $session = new Session();
-        /* attribut une valeur vide à la session d'attribut basket */
+        /* on attribut une valeur vide à la session d'attribut basket */
         $session->set('basket',array());
         /* une fois les actions réalisées et validées, on retourne sur la page de nom index 
         syntaxe correcte /ticket/index.html.twig ou ticket/index.html.twig */
