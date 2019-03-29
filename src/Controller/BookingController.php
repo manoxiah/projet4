@@ -8,7 +8,7 @@ use App\Repository\TicketRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Stripe\Charge;
 use Stripe\Error\Base;
@@ -28,10 +28,8 @@ class BookingController extends AbstractController
      * @Route("/form", name="booking_form", methods={"GET","POST"})
      * 
      */
-    public function form(Request $request): Response
+    public function form(SessionInterface $session, Request $request): Response
     {
-        /* class Session instaciée et mise de l'objet dans la variable $session */
-        $session = new Session();
         /* création de la variable $basket, contenant le contenu de  $_SESSION['basket']*/
         $basket = $session->get('basket');
         /* test du contenu de la variable $basket avec un if */
@@ -120,9 +118,8 @@ class BookingController extends AbstractController
     /**
      * @Route("/payment", name="booking_payment", methods={"POST"})
      */
-    public function payment(Request $request, \Swift_Mailer $mailer): Response
+    public function payment(SessionInterface $session, Request $request, \Swift_Mailer $mailer): Response
     {
-        $session = new Session();
         $basket = $session->get('basket');
         /* création de la variable $entityManager contenant la connexion a doctrine */
         $entityManager = $this->getDoctrine()->getManager();
@@ -164,7 +161,7 @@ class BookingController extends AbstractController
                 ),
                 'text/html'
             );
-        /* fonction php permettant d envoyer le mail de confirmation contenent les ou les billets réservé (s) */
+        /* fonction php permettant d envoyer le mail de confirmation contenent le ou les billets réservé (s) */
         $mailer->send($message);
             return $this->render('booking/resume.html.twig', ['basket' => $basket]);
         }
@@ -180,9 +177,8 @@ class BookingController extends AbstractController
     /**
      * @Route("/delete_to_basket/{id}", name="booking_delete_to_basket", methods={"GET"})
      */
-    public function delete_to_basket($id): Response
+    public function delete_to_basket(SessionInterface $session, $id): Response
     {
-        $session = new Session();
         $basket = $session->get('basket');
         /* suppression du ticket cliqué par l utilisateur dans le pannier, ici $basket(avec en parametre id du ticket) */
         unset($basket[$id]);

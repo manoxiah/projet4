@@ -14,7 +14,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 
 class TicketController extends AbstractController
@@ -26,10 +26,8 @@ class TicketController extends AbstractController
     fonction déclarée comme publique ( accès de partout ), dont le nom est index,
     qui ne recoit aucun parametre mais qui renvoi une reponse
     */
-    public function index(): Response
+    public function index(SessionInterface $session): Response
     {
-        /* on instancie l'objet "session()" avec "new"( c est quoi new ? ) pour la mettre dans la variable "$session" */
-        $session = new Session();
         /* on attribut une valeur vide à la session d'attribut basket */
         $session->set('basket',array());
         /* une fois les actions réalisées et validées, on retourne sur la page de nom index 

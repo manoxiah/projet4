@@ -23,7 +23,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  *
  */
 
- /* quelle est la difference entre extends et implements */
 class TicketType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
