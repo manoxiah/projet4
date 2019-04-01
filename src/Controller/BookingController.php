@@ -44,6 +44,7 @@ class BookingController extends AbstractController
         $ticket = new Ticket();
 
         $form = $this->createForm(TicketType::class, $ticket);
+        /* chargement des donnees utilisateur " ticket " dans objet form ( verification ) */
         $form->handleRequest($request);
 
         /* verifiaction des données du formulaire et son envoi */
