@@ -40,7 +40,7 @@ class ConstraintDateBookingValidator extends ConstraintValidator
                 ->addViolation();
         }
         else {
-            $date = \DateTime::createFromFormat('d/m/Y',$value);
+            $date = \DateTime::createFromFormat('d/m',$value);
             
             if ( $date->format('D') == 'Tue' || $date->format('D') == 'Sun' )
             {
