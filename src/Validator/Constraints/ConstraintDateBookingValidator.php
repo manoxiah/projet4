@@ -40,18 +40,20 @@ class ConstraintDateBookingValidator extends ConstraintValidator
                 ->addViolation();
         }
         else {
-            $date = \DateTime::createFromFormat('d/m',$value);
-            
+            $date = \DateTime::createFromFormat('d/m/Y',$value);
+
             if ( $date->format('D') == 'Tue' || $date->format('D') == 'Sun' )
             {
-
                 $this->context->buildViolation($constraint->message2)
                 ->addViolation();
             }
-            $DateForbidden = [ '01/05/2019','01/11/2019','25/12/2019' ];
-            if ( in_array($value,$DateForbidden))
-            {
+            $DateForbidden = [ '01/05','01/11','25/12','01/01' ];
+            $split = explode( '/', $value );
 
+            $DateDayMonts = $split[0].'/'.$split[1];
+
+            if ( in_array($DateDayMonts,$DateForbidden))
+            {
                 $this->context->buildViolation($constraint->message3)
                 ->addViolation();
             }
