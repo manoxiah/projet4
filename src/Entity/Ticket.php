@@ -2,8 +2,9 @@
 
 namespace App\Entity;
 
-/* a quoi sert le as ???????*/
+
 use Doctrine\ORM\Mapping as ORM;
+use App\Validator\Constraints as MyAssert;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -53,8 +54,10 @@ class Ticket
      * )
      */
     private $firstName;
-
+    
     /**
+     * @Assert\NotBlank
+     * @MyAssert\ConstraintBirthDate
      * @ORM\Column(type="string")
      */
     private $birthDate;
@@ -65,6 +68,8 @@ class Ticket
     private $country;
 
     /**
+     * @Assert\NotBlank
+     * @MyAssert\ConstraintDateBooking
      * @ORM\Column(type="string")
      */
     private $dateBooking;

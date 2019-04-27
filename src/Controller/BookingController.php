@@ -58,6 +58,12 @@ class BookingController extends AbstractController
             /* creation de a variable $dateBooking en lui attribuent la valeur que contient $ticket->getDateBooking() 
             avec le format renseigné */
             $dateBooking = \DateTime::createFromFormat('d/m/Y',$ticket->getDateBooking());
+
+            if ( $dateBirhtDay == false || $dateBooking == false )
+            {
+                $this->addFlash("error", "Les dates ne sont pas au bon format");
+                return $this->render('booking/form.html.twig', ['form' => $form->createView(), 'basket' => $basket]);
+            }
             /* creation de la variable $interval qui nous donnera l age de la personne,
             difference entre date du jour et la date de naissance */
             $interval = $dateToDay->diff($dateBirhtDay);
