@@ -47,7 +47,7 @@ class ConstraintDateBookingValidator extends ConstraintValidator
                 $this->context->buildViolation($constraint->message2)
                 ->addViolation();
             }
-            $DateForbidden = [ '01/05','01/11','25/12','01/01' ];
+            $DateForbidden = [ '01/01','01/05','01/11','25/12' ];
             $split = explode( '/', $value );
 
             $DateDayMonts = $split[0].'/'.$split[1];
